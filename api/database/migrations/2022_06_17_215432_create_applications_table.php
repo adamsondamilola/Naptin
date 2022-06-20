@@ -11,14 +11,14 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up() : void
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
-            $table->foreignId('app_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('course_id')->constrained()->onDelete('cascade');
+            $table->foreignId('application_number')->unique();
+            $table->foreignId('user_id');
+            $table->foreignId('course_id');
             $table->string('title');
             $table->tinyInteger('status')->default(0);
 
@@ -31,7 +31,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('applications');
     }
