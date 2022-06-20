@@ -11,7 +11,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
@@ -23,9 +23,14 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->string('signature')->nullable();
             $table->string('residential_address')->nullable();
-            $table->foreignId('state_of_residence')->constrained()->onDelete('cascade');
-            $table->foreignId('state_of_origin')->constrained()->onDelete('cascade');
-            $table->foreignId('lga_of_origin')->constrained()->onDelete('cascade');
+            $table->integer('state_of_residence')->nullable();
+            $table->integer('state_of_origin')->nullable();
+            $table->unsignedBigInteger('lga_of_origin')->nullable();
+
+
+            $table->foreign('state_of_residence')->references('id')->on('states')->restrictOnDelete();
+            $table->foreign('state_of_origin')->references('id')->on('states')->restrictOnDelete();
+            $table->foreign('lga_of_origin')->references('id')->on('local_areas')->restrictOnDelete();
 
             $table->timestamps();
         });
@@ -36,7 +41,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('user_details');
     }
