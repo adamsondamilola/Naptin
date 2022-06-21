@@ -11,14 +11,14 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('professional_certs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->restrictOnDelete();
             $table->string('certification_name');
-            $table->string('awarding_name');
-            $table->enum('awarding_name', ['vocational','professional']);
+            $table->string('awarding_body');
+            $table->enum('type', ['vocational','professional']);
             $table->date('award_date');
             $table->string('document');
             $table->date('expiry_date');

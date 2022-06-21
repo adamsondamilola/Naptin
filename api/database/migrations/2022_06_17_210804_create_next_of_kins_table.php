@@ -11,16 +11,15 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up() : void
+    public function up(): void
     {
-        Schema::create('applications', function (Blueprint $table) {
+        Schema::create('next_of_kins', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
-            $table->foreignId('application_number')->unique();
-            $table->foreignId('user_id');
-            $table->foreignId('course_id');
-            $table->string('title');
-            $table->tinyInteger('status')->default(0);
+            $table->string('first_name')->nullable();
+            $table->string('surname')->nullable();
+            $table->string('relationship')->nullable();
+            $table->text('address')->nullable();
+            $table->string('phone_number', 15)->nullable();
 
             $table->timestamps();
         });
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('applications');
+        Schema::dropIfExists('next_of_kins');
     }
 };
