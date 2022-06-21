@@ -15,8 +15,8 @@ class CountryStateLocalSeeder extends Seeder
      */
     public function run(): void
     {
-        $path = 'database/seeders/sql/country_state_local.sql';
-        DB::unprepared(file_get_contents($path));
+        $file = __DIR__.'/sql/country_state_local.sql';
+        DB::unprepared(file_get_contents($file));
         $this->command->info('Country, State and Local table seeded!');
     }
 }

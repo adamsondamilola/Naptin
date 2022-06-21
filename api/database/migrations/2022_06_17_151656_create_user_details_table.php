@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->string('signature')->nullable();
             $table->string('residential_address')->nullable();
-            $table->integer('state_of_residence')->nullable();
-            $table->integer('state_of_origin')->nullable();
+            $table->unsignedInteger('state_of_residence')->nullable();
+            $table->unsignedInteger('state_of_origin')->nullable();
             $table->unsignedBigInteger('lga_of_origin')->nullable();
 
 
