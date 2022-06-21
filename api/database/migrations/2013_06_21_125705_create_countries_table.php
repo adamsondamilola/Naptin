@@ -19,6 +19,21 @@ return new class extends Migration
             $table->string('name', 150);
             $table->integer('phonecode');
         });
+
+        Schema::create('states', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 30);
+            $table->integer('country_id')->default(1);
+        });
+
+        Schema::create('local_areas', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedInteger('country_id');
+            $table->unsignedInteger('state_id');
+            $table->string('name');
+        });
+
+        \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => 'CountryStateLocalSeeder']);
     }
 
     /**
@@ -29,5 +44,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('countries');
+        Schema::dropIfExists('states');
+        Schema::dropIfExists('local_areas');
     }
 };

@@ -2,10 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Enums\Gender;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
 class TraineeRegistrationTest extends TestCase
@@ -23,20 +21,22 @@ class TraineeRegistrationTest extends TestCase
         $this->withoutExceptionHandling();
 
         $registrationData = [
-            'first_name' => $this->faker->firstName,
+            'firstName' => $this->faker->firstName,
             'surname' => $this->faker->lastName,
-            'date_of_birth' => $this->faker->date,
-            'gender' => array_rand(Gender::cases()),
+            'dateOfBirth' => $this->faker->date,
+            'gender' => 'm',
             'email' => $this->faker->email,
-            'phone' => '2348121442009',
-            'password' => Hash::make('password'),
+            'phoneNumber' => '2348121442009',
+            'password' => 'password',
+            'password_confirmation' => 'password',
             'step' => 1
         ];
 
         $response = $this->post('/api/v1/auth/register', $registrationData);
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
         $this->assertDatabaseHas('users', ['email' => $registrationData['email']]);
         $this->assertDatabaseCount('users', 1);
+        $this->assertDatabaseCount('user_details', 1);
     }
 }
