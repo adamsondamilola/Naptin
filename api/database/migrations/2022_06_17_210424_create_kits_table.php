@@ -11,10 +11,11 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('kits', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->restrictOnDelete();
             $table->enum('shoe_size', ['s','m','l','xl']);
             $table->enum('overall_size', ['s','m','l','xl']);
             $table->enum('t_shirt_size', ['s','m','l','xl']);

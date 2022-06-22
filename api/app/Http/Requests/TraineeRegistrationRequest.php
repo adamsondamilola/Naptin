@@ -27,7 +27,6 @@ class TraineeRegistrationRequest extends FormRequest
         return match ($this->input('step')) {
             1 => $this->step1Validation(),
         };
-
     }
 
     private function step1Validation(): array
@@ -36,7 +35,7 @@ class TraineeRegistrationRequest extends FormRequest
             'firstName' => ['required', 'string'],
             'surname' => ['required', 'string'],
             'dateOfBirth' => ['required', 'date'],
-            'gender' => ['required', 'in:'.Gender::strings()],
+            'gender' => ['required', 'in:' . Gender::strings()],
             'email' => ['required', 'email', 'unique:users'],
             'phoneNumber' => ['required', 'digits_between:12,15'],
             'password' => ['required', 'confirmed'],

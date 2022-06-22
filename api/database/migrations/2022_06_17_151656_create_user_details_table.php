@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('user_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->restrictOnDelete();
             $table->string('first_name')->nullable();
             $table->string('surname')->nullable();
             $table->date('birth_date')->nullable();

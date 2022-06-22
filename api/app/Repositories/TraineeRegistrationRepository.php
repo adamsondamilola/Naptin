@@ -15,12 +15,19 @@ class TraineeRegistrationRepository
     /**
      * @param array $data
      * @throws \Exception
-     * @return bool
+     * @return User|bool
      */
-    public function createUser(array $data): bool
+    public function createUser(array $data): User|bool
     {
-        DB::transaction(function() use($data) {
+        $user = DB::transaction(function() use ($data) {
+            $user = new User();
+            $user->uuid = Str::uuid()->toString();
+            $user->email = $data['email'];
+            $user->password = Hash::make($data['password']);
+            $user->save();
+
             $userDetail = new UserDetail();
+            $userDetail->user_id = $user->id;
             $userDetail->first_name = strtolower($data['firstName']);
             $userDetail->surname = strtolower($data['surname']);
             $userDetail->birth_date = new Carbon($data['dateOfBirth']);
@@ -28,13 +35,8 @@ class TraineeRegistrationRepository
             $userDetail->phone_number = $data['phoneNumber'];
             $userDetail->save();
 
-            $user = new User();
-            $user->uuid = Str::uuid()->toString();
-            $user->email = $data['email'];
-            $user->password = Hash::make($data['password']);
-            $user->user_detail_id = $userDetail->id;
-            $user->save();
+            return $user;
         });
-        return true;
+        return $user ?? false;
     }
 }

@@ -19,8 +19,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'auth'], function(){
+Route::group(['prefix' => 'auth'], function() {
     Route::post('register', [AuthController::class, 'register']);
+    Route::get('verify/{id}/{hash}', [AuthController::class, 'verify'])->middleware(['auth', 'signed'])->name('verification.verify');
 });
 
 Route::fallback(fn () => response()->json(['error' => 'Not found'], 404));
