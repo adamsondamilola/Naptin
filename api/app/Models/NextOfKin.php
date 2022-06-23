@@ -10,5 +10,4 @@ class NextOfKin extends Model
     use HasFactory;
 
     protected $guarded = [];
-
 }

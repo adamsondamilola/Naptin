@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('next_of_kins', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->restrictOnDelete();
             $table->string('first_name')->nullable();
             $table->string('surname')->nullable();
             $table->string('relationship')->nullable();

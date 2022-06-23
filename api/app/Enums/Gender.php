@@ -12,7 +12,7 @@ enum Gender: string
         $string = '';
         $casesLength = count(self::cases()) - 1;
         $iteration = 0;
-        foreach (self::cases() as $case){
+        foreach (self::cases() as $case) {
             $string = $iteration === $casesLength ? $string . $case->value : $string . $case->value . ',';
             $iteration++;
         }

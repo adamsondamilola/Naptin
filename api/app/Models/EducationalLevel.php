@@ -10,5 +10,4 @@ class EducationalLevel extends Model
     use HasFactory;
 
     protected $guarded = [];
-
 }

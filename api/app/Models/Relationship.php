@@ -10,5 +10,4 @@ class Relationship extends Model
     use HasFactory;
 
     protected $guarded = [];
-
 }
