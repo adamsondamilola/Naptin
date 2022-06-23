@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\Requests\EmailVerificationRequest;
@@ -16,7 +16,7 @@ class EmailVerificationController extends Controller
     public function verify(EmailVerificationRequest $request): JsonResponse
     {
         $message = '';
-        $user = $this->userRepository->getById($id);
+        $user = $this->userRepository->getById($request->route('id'));
 
         if ($user->hasVerifiedEmail()) {
             $message = 'Email already verified';
