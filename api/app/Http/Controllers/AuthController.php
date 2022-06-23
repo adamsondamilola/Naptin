@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use App\Services\TraineeRegistrationService;
 use App\Http\Requests\TraineeRegistrationRequest;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response as ResponseConstant;
 
 class AuthController extends Controller
@@ -20,24 +18,20 @@ class AuthController extends Controller
 
     public function register(TraineeRegistrationRequest $request): JsonResponse
     {
-        $registerNewTrainee = $this->traineeRegistration->createUser($request->all());
-        if ($registerNewTrainee) {
+        $newTrainee = $this->traineeRegistration->createUser($request->all());
+        if ($newTrainee) {
+            $token = $newTrainee->createToken('AccessAuthToken')->plainTextToken;
             return response()->json([
                 'success' => true,
-                'message' => 'Trainee Successfully Registered'
+                'message' => 'Trainee Successfully Registered',
+                'auth_token' => $token,
+                'user' => $newTrainee
             ], ResponseConstant::HTTP_CREATED);
         }
 
         return response()->json([
             'success' => false,
-            'message' => 'Registration Not Successful'
+            'message' => 'Registration failed'
         ], ResponseConstant::HTTP_INTERNAL_SERVER_ERROR);
-    }
-
-    public function verify(EmailVerificationRequest $request): void
-    {
-        dd('stop here');
-        $request->fulfill();
-        dd(Auth::check(), Auth::user());
     }
 }

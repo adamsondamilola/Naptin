@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Events\TraineeRegistered;
+use App\Models\User;
 use App\Repositories\TraineeRegistrationRepository;
 use Illuminate\Support\Facades\Log;
 
@@ -15,12 +16,12 @@ class TraineeRegistrationService
         $this->traineeRegistrationRepo = new TraineeRegistrationRepository();
     }
 
-    public function createUser(array $data): bool
+    public function createUser(array $data): User|bool
     {
         try {
             $user = $this->traineeRegistrationRepo->createUser($data);
             event(new TraineeRegistered($user));
-            return true;
+            return $user;
         } catch (\Exception $exception) {
             Log::error($exception->getMessage(), [
                 'Trace' => $exception->getTrace()
