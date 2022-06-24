@@ -7,7 +7,7 @@ enum Gender: string
     case MALE = 'm';
     case FEMALE = 'f';
 
-    public static function strings(): string
+    public static function toString(): string
     {
         $string = '';
         $casesLength = count(self::cases()) - 1;

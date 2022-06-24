@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\UserRepository;
 use Illuminate\Http\JsonResponse;
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\TraineeRegistrationRequest;
+use App\Http\Requests\UserRegistrationRequest;
 use App\Services\UserRegistrationService;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response as ResponseConstant;
@@ -19,13 +19,13 @@ class AuthController extends Controller
     {
     }
 
-    public function register(TraineeRegistrationRequest $request): JsonResponse
+    public function register(UserRegistrationRequest $request): JsonResponse
     {
-        $newTrainee = $this->userRegistrationService->createTrainee($request->all());
+        $newUser = $this->userRegistrationService->createTrainee($request->all());
         $responseData = [];
-        if ($newTrainee) {
-            $responseData['message'] = 'Trainee Successfully Registered';
-            $responseData['data'] = $newTrainee;
+        if ($newUser) {
+            $responseData['message'] = ucfirst($request->post('userType')).' Successfully Registered';
+            $responseData['data'] = $newUser;
             $responseData['status'] = ResponseConstant::HTTP_CREATED;
         } else {
             $responseData['message'] = 'Registration failed';
