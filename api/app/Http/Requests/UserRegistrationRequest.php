@@ -42,7 +42,7 @@ class UserRegistrationRequest extends FormRequest
             'email' => ['required', 'email', 'unique:users'],
             'phoneNumber' => ['required', 'digits_between:12,15'],
             'password' => ['required', 'confirmed'],
-            'userType' => ['required', 'in:' . UserType::canCreateAccount()],
+            'userType' => ['required', 'in:' . UserType::grantedPublicRegistration()],
             'step' => ['required', 'integer']
         ];
     }

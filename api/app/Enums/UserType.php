@@ -8,7 +8,7 @@ enum UserType: string
     case TRAINER = 'trainer';
     case ADMIN = 'admin';
 
-    public static function canCreateAccount(): string
+    public static function grantedPublicRegistration(): string
     {
         $string = '';
         $iteration = 0;
@@ -24,5 +24,10 @@ enum UserType: string
     public static function getTrainer(): string
     {
         return self::TRAINER->value;
+    }
+
+    public static function getTrainee(): string
+    {
+        return self::TRAINEE->value;
     }
 }
