@@ -16,14 +16,14 @@ class EmailVerificationController extends Controller
     public function verify(EmailVerificationRequest $request): JsonResponse
     {
         $message = '';
-        $user = $this->userRepository->getById($request->route('id'));
+        $user = $this->userRepository->getById((int)$request->route('id'));
 
         if ($user->hasVerifiedEmail()) {
             $message = 'Email already verified';
         } elseif ($user->markEmailAsVerified()) {
             $message = 'Email verification successful';
         }
-         return response()->json([
+        return response()->json([
              'message' => $message
          ], ResponseConstant::HTTP_OK);
     }

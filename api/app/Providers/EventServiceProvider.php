@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Events\TraineeRegistered;
+use App\Events\TraineeRegisteredEvent;
 use App\Listeners\TraineeRegisteredListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
@@ -14,7 +14,7 @@ class EventServiceProvider extends ServiceProvider
      * @var array<class-string, array<int, class-string>>
      */
     protected $listen = [
-        TraineeRegistered::class => [
+        TraineeRegisteredEvent::class => [
             TraineeRegisteredListener::class,
         ],
     ];

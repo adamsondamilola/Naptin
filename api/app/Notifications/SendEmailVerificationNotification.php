@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class SendEmailVerificationNotification extends VerifyEmail
@@ -40,7 +39,7 @@ class SendEmailVerificationNotification extends VerifyEmail
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->subject('Verify '.config('app.name'). ' Account')
+                    ->subject('Verify ' . config('app.name') . ' Account')
                     ->view('emails.auth.verify-email', [
                         'firstName' => $notifiable->detail->first_name,
                         'verificationUrl' => $this->verificationUrl($notifiable)

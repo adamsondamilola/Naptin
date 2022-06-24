@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace App\Listeners;
 
-use App\Events\TraineeRegistered;
+use App\Events\TraineeRegisteredEvent;
 use App\Notifications\SendEmailVerificationNotification;
 
 class TraineeRegisteredListener
@@ -12,7 +12,7 @@ class TraineeRegisteredListener
         //
     }
 
-    public function handle(TraineeRegistered $event): void
+    public function handle(TraineeRegisteredEvent $event): void
     {
         $event->user->notify(new SendEmailVerificationNotification());
     }

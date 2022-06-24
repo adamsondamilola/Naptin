@@ -10,4 +10,6 @@ class UserDetail extends Model
     use HasFactory;
 
     protected $fillable = [];
+
+    protected $hidden = ['id', 'user_id'];
 }
