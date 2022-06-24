@@ -48,7 +48,7 @@ class UserRepository
 
                 return $user;
             });
-        }catch (\Exception $e) {
+        } catch (\Exception $e) {
             Log::error($e->getMessage(), [
                 'Trace' => $e->getTrace()
             ]);

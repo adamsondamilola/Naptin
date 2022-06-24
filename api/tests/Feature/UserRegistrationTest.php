@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class TraineeRegistrationTest extends TestCase
+class UserRegistrationTest extends TestCase
 {
     use WithFaker;
     use RefreshDatabase;
@@ -29,6 +29,7 @@ class TraineeRegistrationTest extends TestCase
             'phoneNumber' => '2348121442009',
             'password' => 'password',
             'password_confirmation' => 'password',
+            'userType' => 'trainee',
             'step' => 1
         ];
 

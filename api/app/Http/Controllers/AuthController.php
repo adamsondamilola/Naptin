@@ -16,14 +16,13 @@ class AuthController extends Controller
         private readonly UserRegistrationService $userRegistrationService,
         private readonly AuthenticationService   $authService,
         private readonly UserRepository          $userRepository
-    )
-    {
+    ) {
     }
 
     public function register(UserRegistrationRequest $request): JsonResponse
     {
         $responseData = $this->userRegistrationService->createUser($request->all());
-        $status = $responseData->success ? ResponseConstant::HTTP_OK : ResponseConstant::HTTP_INTERNAL_SERVER_ERROR;
+        $status = $responseData->success ? ResponseConstant::HTTP_CREATED : ResponseConstant::HTTP_INTERNAL_SERVER_ERROR;
         return response()->json($responseData, $status);
     }
 

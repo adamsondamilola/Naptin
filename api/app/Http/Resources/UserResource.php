@@ -16,7 +16,9 @@ class UserResource extends JsonResource
         return [
             'id' => $this->resource->uuid,
             'email' => $this->resource->email,
-            'detail' => UserDetailResource::make($this->resource->detail)
+            'detail' => UserDetailResource::make($this->resource->detail),
+            'roles' => $this->resource->getRoleNames(),
+            'permissions' => $this->resource->getAllPermissions()
         ];
     }
 }

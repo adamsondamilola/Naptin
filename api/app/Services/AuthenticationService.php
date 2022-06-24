@@ -11,8 +11,7 @@ class AuthenticationService
 {
     public function __construct(
         private readonly GenerahResponse $response
-    )
-    {
+    ) {
     }
 
     public function createAuthToken(User $user): string
