@@ -1,8 +1,10 @@
 <?php
-
+declare(strict_types=1);
 namespace App\Providers;
 
+use App\Enums\UserType;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -20,10 +22,12 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
 
-        //
+        Gate::before(function ($user, $ability) {
+            return $user->hasRole(UserType::SUPER_ADMIN->value) ? true : null;
+        });
     }
 }

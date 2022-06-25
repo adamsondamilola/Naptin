@@ -7,6 +7,7 @@ enum UserType: string
     case TRAINEE = 'trainee';
     case TRAINER = 'trainer';
     case ADMIN = 'admin';
+    case SUPER_ADMIN = 'super admin';
 
     public static function grantedPublicRegistration(): string
     {

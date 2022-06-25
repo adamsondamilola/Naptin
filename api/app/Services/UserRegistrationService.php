@@ -10,8 +10,6 @@ use App\Repositories\UserRepository;
 
 class UserRegistrationService
 {
-//    private GenerahResponse $response;
-
     public function __construct(
         private readonly UserRepository $userRepository,
         private readonly AuthenticationService $authService,
@@ -23,10 +21,9 @@ class UserRegistrationService
     {
         if ($user = $this->userRepository->createUser($data)) {
             if ($data['userType'] === UserType::getTrainer()) {
-                $user->assignRole(['trainer']);
-            //TODO:: Assign Trainer Role and Set Permissions
+                $user->assignRole([UserType::getTrainer()]);
             } elseif ($data['userType'] === UserType::getTrainee()) {
-                $user->assignRole(['trainee']);
+                $user->assignRole([UserType::getTrainee()]);
                 event(new TraineeRegisteredEvent($user));
             }
 
