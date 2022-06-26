@@ -1,18 +1,21 @@
 <?php
 
+use App\Http\Controllers\TraineeManagementController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\EmailVerificationController;
 
-Route::group(['prefix' => 'auth'], function() {
+Route::group(['prefix' => 'auth'], function () {
     Route::post('login', [AuthController::class, 'login']);
     Route::post('register', [AuthController::class, 'register']);
-    Route::get('verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])->middleware(['auth:sanctum', 'signed'])->name('verification.verify');
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
-        Route::post('verify/resend', [EmailVerificationController::class, 'resend'])->name('verification.resend');
+        Route::controller(EmailVerificationController::class)->group(function () {
+            Route::get('verify/{id}/{hash}', 'verify')->middleware(['signed'])->name('verification.verify');
+            Route::post('verify/resend', 'resend')->name('verification.resend');
+        });
         Route::post('logout', [AuthController::class, 'logout']);
         Route::post('courses', [CourseController::class, 'store']);
         Route::put('courses/{id}', [CourseController::class, 'update']);
@@ -29,5 +32,13 @@ Route::get('courses/search/{title}', [CourseController::class, 'search']);
 Route::get('announcements', [AnnouncementController::class, 'index']);
 Route::get('announcements/{id}', [AnnouncementController::class, 'show']);
 Route::get('announcements/search/{title}', [AnnouncementController::class, 'search']);
+
+
+Route::group(['prefix' => 'module/trainee-management', 'middleware' => ['auth:sanctum']], function () {
+    Route::controller(TraineeManagementController::class)->group(function () {
+        Route::get('all-trainees', 'index');
+    });
+});
+
 
 Route::fallback(fn () => response()->json(['error' => 'Endpoint Not found'], 404));

@@ -20,13 +20,12 @@ class RolesAndPermissionsSeeder extends Seeder
 
         Permission::create(['name' => 'trainee management']);
         Permission::create(['name' => 'trainer management']);
-        Permission::create(['name' => 'training program module management']);
-        Permission::create(['name' => 'training center module']);
-        Permission::create(['name' => 'training center module management']);
-        Permission::create(['name' => 'messaging module management']);
-        Permission::create(['name' => 'Support and helpdesk module management']);
-        Permission::create(['name' => 'trainee company management module']);
-        Permission::create(['name' => 'report module']);
+        Permission::create(['name' => 'training program management']);
+        Permission::create(['name' => 'training center management']);
+        Permission::create(['name' => 'messaging management']);
+        Permission::create(['name' => 'Support and helpdesk management']);
+        Permission::create(['name' => 'trainee company management']);
+        Permission::create(['name' => 'report']);
 
         Role::create(['name' => 'trainee']);
         Role::create(['name' => 'trainer']);

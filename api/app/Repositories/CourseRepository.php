@@ -70,7 +70,6 @@ class CourseRepository
      */
     public function update($data, $id)
     {
-
         $course = $this->course->find($id);
 
         $course->title = $data['title'];
@@ -89,7 +88,6 @@ class CourseRepository
      */
     public function delete($id)
     {
-
         $course = $this->course->find($id);
         $course->delete();
 
@@ -99,8 +97,8 @@ class CourseRepository
     public function getResult($query)
     {
         return $this->course
-            ->where('course_title', 'LIKE', '%'.$query.'%')
-            ->orWhere('description', 'LIKE', '%'.$query.'%')
+            ->where('course_title', 'LIKE', '%' . $query . '%')
+            ->orWhere('description', 'LIKE', '%' . $query . '%')
             ->get();
     }
 }

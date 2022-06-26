@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Exception;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Services\CourseService;
 
@@ -45,7 +44,6 @@ class CourseController extends Controller
         }
 
         return response()->json($result, $result['status']);
-
     }
 
     /**
@@ -150,7 +148,6 @@ class CourseController extends Controller
 
         try {
             $result['data'] = $this->courseService->updateCourse($data, $id);
-
         } catch (Exception $e) {
             $result = [
                 'status' => 500,
@@ -159,7 +156,6 @@ class CourseController extends Controller
         }
 
         return response()->json($result, $result['status']);
-
     }
 
     /**

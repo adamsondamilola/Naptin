@@ -38,7 +38,6 @@ class CourseService
 
         try {
             $course = $this->courseRepository->delete($id);
-
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -49,7 +48,6 @@ class CourseService
         DB::commit();
 
         return $course;
-
     }
 
     /**
@@ -95,7 +93,6 @@ class CourseService
 
         try {
             $course = $this->courseRepository->update($data, $id);
-
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -106,7 +103,6 @@ class CourseService
         DB::commit();
 
         return $course;
-
     }
 
     /**
@@ -136,6 +132,4 @@ class CourseService
     {
         return $this->courseRepository->getResult($query);
     }
-
 }
-
