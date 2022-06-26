@@ -13,11 +13,9 @@ class Authenticate extends Middleware
      * @param  \Illuminate\Http\Request  $request
      * @return string|null
      */
-    protected function redirectTo($request)
+    protected function redirectTo($request): ?string
     {
-        if (! $request->expectsJson()) {
-            // return route('login'); TODO::Implement the url for the web frontend in prod
-        }
+        return null;
     }
 
     /**
@@ -29,7 +27,7 @@ class Authenticate extends Middleware
      *
      * @throws \Illuminate\Auth\AuthenticationException
      */
-    protected function unauthenticated($request, array $guards)
+    protected function unauthenticated($request, array $guards): void
     {
         throw new AuthenticationException(
             'Unauthenticated.',

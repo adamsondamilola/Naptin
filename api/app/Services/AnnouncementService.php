@@ -24,7 +24,6 @@ class AnnouncementService
 
         try {
             $announcement = $this->announcementRepository->delete($id);
-
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -35,7 +34,6 @@ class AnnouncementService
         DB::commit();
 
         return $announcement;
-
     }
 
     public function getAll()
@@ -63,7 +61,6 @@ class AnnouncementService
 
         try {
             $announcement = $this->announcementRepository->update($data, $id);
-
         } catch (Exception $e) {
             DB::rollBack();
             Log::info($e->getMessage());
@@ -74,7 +71,6 @@ class AnnouncementService
         DB::commit();
 
         return $announcement;
-
     }
 
     public function saveAnnouncementData($data)

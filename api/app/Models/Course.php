@@ -16,7 +16,7 @@ class Course extends Model
     {
         static::creating(function ($model) {
             $model->uuid = Str::uuid();
-            $model->course_code = "NAP-".Str::random(5);
+            $model->course_code = "NAP-" . Str::random(5);
         });
     }
 }

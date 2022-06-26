@@ -30,7 +30,7 @@ class UserRepository
     public function createUser(array $data): ?User
     {
         try {
-            return DB::transaction(function() use ($data) {
+            return DB::transaction(function () use ($data) {
                 $user = new User();
                 $user->uuid = Str::uuid()->toString();
                 $user->email = $data['email'];

@@ -51,5 +51,4 @@ class CourseTest extends TestCase
         // 'description' => $data['description']
         ]);
     }
-
 }

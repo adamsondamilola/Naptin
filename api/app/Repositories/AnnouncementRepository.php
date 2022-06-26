@@ -61,9 +61,8 @@ class AnnouncementRepository
     public function getResult($query)
     {
         return $this->announcement
-            ->where('title', 'LIKE', '%'.$query.'%')
-            ->orWhere('body', 'LIKE', '%'.$query.'%')
+            ->where('title', 'LIKE', '%' . $query . '%')
+            ->orWhere('body', 'LIKE', '%' . $query . '%')
             ->get();
     }
-
 }

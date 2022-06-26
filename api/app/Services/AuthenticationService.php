@@ -14,11 +14,6 @@ class AuthenticationService
     ) {
     }
 
-    public function createAuthToken(User $user): string
-    {
-        return $user->createToken(config('auth.token_name'))->plainTextToken;
-    }
-
     public function login(?User $user, string $password): GenerahResponse
     {
         if (!$user || ! Hash::check($password, $user->password)) {
@@ -27,10 +22,7 @@ class AuthenticationService
         } else {
             $this->response->success = true;
             $this->response->message = 'Authentication successful';
-            $this->response->data = [
-                'auth_token' => $this->createAuthToken($user),
-                'user' => UserResource::make($user)
-            ];
+            $this->response->data = $this->userDetailWithRoleAndPermissions($user);
         }
         return $this->response;
     }
@@ -38,5 +30,21 @@ class AuthenticationService
     public function invalidateTokens(User $user): void
     {
         $user->tokens()->delete();
+    }
+
+    public function userDetailWithRoleAndPermissions(User $user): array
+    {
+        return  [
+            'auth_token' => $this->createAuthToken($user),
+            'user' => UserResource::make($user),
+            'roles' => $user->getRoleNames(),
+            'permissions' => $user->getAllPermissions()
+        ];
+    }
+
+    private function createAuthToken(User $user): string
+    {
+        $permissions = [];
+        return $user->createToken(config('auth.token_name'), $permissions)->plainTextToken;
     }
 }

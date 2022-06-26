@@ -8,7 +8,6 @@ use App\Services\AnnouncementService;
 
 class AnnouncementController extends Controller
 {
-
     protected $announcementService;
 
     public function __construct(AnnouncementService $announcementService)
@@ -34,7 +33,6 @@ class AnnouncementController extends Controller
         }
 
         return response()->json($result, $result['status']);
-
     }
 
     /**
@@ -104,7 +102,6 @@ class AnnouncementController extends Controller
 
         try {
             $result['data'] = $this->announcementService->updateAnnouncement($data, $id);
-
         } catch (Exception $e) {
             $result = [
                 'status' => 500,
@@ -113,7 +110,6 @@ class AnnouncementController extends Controller
         }
 
         return response()->json($result, $result['status']);
-
     }
 
     /**
