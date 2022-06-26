@@ -3,7 +3,6 @@ declare(strict_types=1);
 namespace App\Http;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class GenerahPayload implements \JsonSerializable
 {
