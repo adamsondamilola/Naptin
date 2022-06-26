@@ -3,33 +3,32 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Models\User;
-use App\Http\GenerahResponse;
+use App\Http\GenerahPayload;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
 
 class AuthenticationService
 {
     public function __construct(
-        private readonly GenerahResponse $response
+        private readonly GenerahPayload $payload
     ) {
     }
 
-    public function login(?User $user, string $password): GenerahResponse
+    public function login(?User $user, string $password): GenerahPayload
     {
         if (!$user || ! Hash::check($password, $user->password)) {
-            $this->response->success = false;
-            $this->response->message = 'Invalid credentials';
+            $this->payload->setPayload(false, 'Invalid credentials');
         } else {
-            $this->response->success = true;
-            $this->response->message = 'Authentication successful';
-            $this->response->data = $this->userDetailWithRoleAndPermissions($user);
+            $this->payload->setPayload(true, 'Authentication successful', $this->userDetailWithRoleAndPermissions($user));
         }
-        return $this->response;
+        return $this->payload;
     }
 
-    public function invalidateTokens(User $user): void
+    public function invalidateTokens(User $user): GenerahPayload
     {
         $user->tokens()->delete();
+        $this->payload->setPayload(true, 'Logout successful');
+        return $this->payload;
     }
 
     public function userDetailWithRoleAndPermissions(User $user): array

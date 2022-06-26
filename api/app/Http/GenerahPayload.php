@@ -5,16 +5,23 @@ namespace App\Http;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class GenerahResponse implements \JsonSerializable
+class GenerahPayload implements \JsonSerializable
 {
-    public bool $success;
-    public string $message;
-    public array|JsonResource $data;
+    private bool $success;
+    private string $message;
+    private array|JsonResource $data;
 
     public function __construct()
     {
         $this->message = '';
         $this->data = [];
+    }
+
+    public function setPayload(bool $success, string $message = '', array|JsonResource $data = []): void
+    {
+        $this->success = $success;
+        $this->message = $message;
+        $this->data = $data;
     }
 
     public function jsonSerialize(): array
