@@ -34,6 +34,7 @@ class UserRepository
                 $user = new User();
                 $user->uuid = Str::uuid()->toString();
                 $user->email = $data['email'];
+                $user->registration_number = $data['registrationNumber'];
                 $user->password = Hash::make($data['password']);
                 $user->save();
 

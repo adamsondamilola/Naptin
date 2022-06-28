@@ -29,8 +29,7 @@ class UserRegistrationTest extends TestCase
             'phoneNumber' => '2348121442009',
             'password' => 'password',
             'password_confirmation' => 'password',
-            'userType' => 'trainee',
-            'step' => 1
+            'userType' => 'trainee'
         ];
 
         $response = $this->post('/api/v1/auth/register', $registrationData);

@@ -22,7 +22,7 @@ class AuthController extends Controller
     public function register(UserRegistrationRequest $request): JsonResponse
     {
         $responseData = $this->userRegistrationService->createUser($request->all());
-        $status = $responseData->success ? ResponseConstant::HTTP_CREATED : ResponseConstant::HTTP_INTERNAL_SERVER_ERROR;
+        $status = $responseData->isSuccess() ? ResponseConstant::HTTP_CREATED : ResponseConstant::HTTP_INTERNAL_SERVER_ERROR;
         return response()->json($responseData, $status);
     }
 

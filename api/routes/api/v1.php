@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TraineeManagementController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CourseController;
@@ -32,6 +33,11 @@ Route::get('courses/search/{title}', [CourseController::class, 'search']);
 Route::get('announcements', [AnnouncementController::class, 'index']);
 Route::get('announcements/{id}', [AnnouncementController::class, 'show']);
 Route::get('announcements/search/{title}', [AnnouncementController::class, 'search']);
+
+//Profile Update
+Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function () {
+    Route::patch('address-update', [UserProfileController::class, 'updateAddress']);
+});
 
 
 Route::group(['prefix' => 'module/trainee-management', 'middleware' => ['auth:sanctum']], function () {

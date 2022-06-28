@@ -23,6 +23,11 @@ class GenerahPayload implements \JsonSerializable
         $this->data = $data;
     }
 
+    public function isSuccess(): bool
+    {
+        return $this->success;
+    }
+
     public function jsonSerialize(): array
     {
         return [

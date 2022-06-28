@@ -26,14 +26,6 @@ class UserRegistrationRequest extends FormRequest
      */
     public function rules(): array
     {
-        return match ($this->post('step')) {
-            1 => $this->step1Validation(),
-            default => throw new \Exception('Unexpected registration step'),
-        };
-    }
-
-    private function step1Validation(): array
-    {
         return [
             'firstName' => ['required', 'regex:/^[A-Za-z\-\s]+$/'],
             'surname' => ['required', 'regex:/^[A-Za-z\-\s]+$/'],
@@ -42,8 +34,7 @@ class UserRegistrationRequest extends FormRequest
             'email' => ['required', 'email', 'unique:users'],
             'phoneNumber' => ['required', 'digits_between:12,15'],
             'password' => ['required', 'confirmed'],
-            'userType' => ['required', 'in:' . UserType::grantedPublicRegistration()],
-            'step' => ['required', 'integer']
+            'userType' => ['required', 'in:' . UserType::grantedPublicRegistration()]
         ];
     }
 
