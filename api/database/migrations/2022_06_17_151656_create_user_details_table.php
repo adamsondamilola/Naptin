@@ -25,11 +25,13 @@ return new class extends Migration
             $table->string('signature')->nullable();
             $table->string('residential_address')->nullable();
             $table->unsignedInteger('state_of_residence')->nullable();
+            $table->unsignedInteger('lga_of_residence')->nullable();
             $table->unsignedInteger('state_of_origin')->nullable();
-            $table->unsignedBigInteger('lga_of_origin')->nullable();
+            $table->unsignedInteger('lga_of_origin')->nullable();
 
 
             $table->foreign('state_of_residence')->references('id')->on('states')->restrictOnDelete();
+            $table->foreign('lga_of_residence')->references('id')->on('local_areas')->restrictOnDelete();
             $table->foreign('state_of_origin')->references('id')->on('states')->restrictOnDelete();
             $table->foreign('lga_of_origin')->references('id')->on('local_areas')->restrictOnDelete();
 

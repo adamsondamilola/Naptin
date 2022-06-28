@@ -16,11 +16,13 @@ class GenerahPayload implements \JsonSerializable
         $this->data = [];
     }
 
-    public function setPayload(bool $success, string $message = '', array|JsonResource $data = []): void
+    public function setPayload(bool $success, string $message = '', array|JsonResource $data = []): self
     {
         $this->success = $success;
         $this->message = $message;
         $this->data = $data;
+
+        return $this;
     }
 
     public function isSuccess(): bool

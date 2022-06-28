@@ -17,6 +17,7 @@ Route::group(['prefix' => 'auth'], function () {
             Route::get('verify/{id}/{hash}', 'verify')->middleware(['signed'])->name('verification.verify');
             Route::post('verify/resend', 'resend')->name('verification.resend');
         });
+        Route::get('user', fn () =>auth()->user());
         Route::post('logout', [AuthController::class, 'logout']);
         Route::post('courses', [CourseController::class, 'store']);
         Route::put('courses/{id}', [CourseController::class, 'update']);
@@ -39,7 +40,7 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function (
     Route::patch('address-update', [UserProfileController::class, 'updateAddress']);
 });
 
-
+//Trainee Management
 Route::group(['prefix' => 'module/trainee-management', 'middleware' => ['auth:sanctum']], function () {
     Route::controller(TraineeManagementController::class)->group(function () {
         Route::get('all-trainees', 'index');

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -55,5 +56,16 @@ class UserRepository
             ]);
             return null;
         }
+    }
+
+    public function updateAddress(array $data): bool
+    {
+        return (bool)UserDetail::whereUserId(Auth::id())->update([
+            'state_of_residence' => $data['stateOfResidence'],
+            'lga_of_residence' => $data['lgaOfResidence'],
+            'state_of_origin' => $data['stateOfOrigin'],
+            'lga_of_origin' => $data['lgaOfOrigin'],
+            'residential_address' => $data['homeAddress']
+        ]);
     }
 }
