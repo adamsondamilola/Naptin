@@ -3,7 +3,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Http\GenerahPayload;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\UserMinInfoCollection;
 use App\Repositories\TraineeManagementRepository;
 
 class TraineeManagementService
@@ -14,10 +14,9 @@ class TraineeManagementService
     ) {
     }
 
-    public function getAllTrainees(): GenerahPayload
+    public function getAllApplicants(): GenerahPayload
     {
-        $data = $this->traineeManagementRepository->getAllTrainees();
-        $this->payload->setPayload(success: true, data: UserResource::collection($data));
-        return $this->payload;
+        $data = $this->traineeManagementRepository->getAllApplicants();
+        return $this->payload->setPayload(true, 'Trainee minimum data returned', new UserMinInfoCollection($data));
     }
 }

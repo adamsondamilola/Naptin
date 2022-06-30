@@ -20,7 +20,7 @@ class TraineeManagementController extends Controller
 
     public function index(): JsonResponse
     {
-        $response = $this->traineeManagementService->getAllTrainees();
+        $response = $this->traineeManagementService->getAllApplicants();
         return response()->json($response, ResponseConstant::HTTP_OK);
     }
 }

@@ -43,7 +43,7 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function (
 //Trainee Management
 Route::group(['prefix' => 'module/trainee-management', 'middleware' => ['auth:sanctum']], function () {
     Route::controller(TraineeManagementController::class)->group(function () {
-        Route::get('all-trainees', 'index');
+        Route::get('all-applications', 'index');
     });
 });
 

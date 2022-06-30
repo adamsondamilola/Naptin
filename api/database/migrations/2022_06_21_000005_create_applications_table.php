@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,12 +14,11 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
+            $table->uuid()->unique();
             $table->string('application_number')->unique();
-            $table->foreignId('user_id')->constrained()->restrictOnDelete();
+            $table->foreignId('trainee_id')->constrained('users')->restrictOnDelete();
             $table->foreignId('course_id')->constrained()->restrictOnDelete();
-            $table->string('title');
-            $table->tinyInteger('status')->default(0);
+            $table->string('status');
 
             $table->timestamps();
         });

@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -15,12 +14,12 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->uuid('uuid');
+            $table->uuid()->unique();
             $table->string('course_code');
             $table->foreignId('trainer_id')->constrained('users')->restrictOnDelete();
             $table->foreignId('course_type_id')->constrained()->restrictOnDelete();
             $table->foreignId('program_type_id')->constrained()->restrictOnDelete();
-            $table->string('course_title');
+            $table->string('title');
             $table->text('description');
             $table->string('course_image');
             $table->string('program_category');
@@ -30,8 +29,8 @@ return new class extends Migration
             $table->bigInteger('cost');
             $table->integer('no_of_installments');
             $table->bigInteger('min_deposit');
-            $table->enum('pub_status', ['draft', 'published', 'submitted']);
-            $table->date('pub_date');
+            $table->enum('status', ['draft', 'published', 'submitted']);
+            $table->date('published_date');
             $table->date('ad_close_date');
             $table->date('pay_close_date');
             $table->date('projected_start_date');
