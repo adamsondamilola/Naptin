@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\TraineeManagementController;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
@@ -17,7 +18,7 @@ Route::group(['prefix' => 'auth'], function () {
             Route::get('verify/{id}/{hash}', 'verify')->middleware(['signed'])->name('verification.verify');
             Route::post('verify/resend', 'resend')->name('verification.resend');
         });
-        Route::get('user', fn () =>auth()->user());
+//        Route::get('user', [AuthController::class, 'user']);
         Route::post('logout', [AuthController::class, 'logout']);
         Route::post('courses', [CourseController::class, 'store']);
         Route::put('courses/{id}', [CourseController::class, 'update']);
@@ -34,6 +35,10 @@ Route::get('courses/search/{title}', [CourseController::class, 'search']);
 Route::get('announcements', [AnnouncementController::class, 'index']);
 Route::get('announcements/{id}', [AnnouncementController::class, 'show']);
 Route::get('announcements/search/{title}', [AnnouncementController::class, 'search']);
+
+Route::group(['prefix' => 'application', 'middleware' => 'auth:sanctum'], function () {
+    Route::post('create', [ApplicantController::class, 'store']);
+});
 
 //Profile Update
 Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function () {

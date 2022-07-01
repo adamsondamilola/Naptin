@@ -44,6 +44,11 @@ class CourseRepository
             ->get();
     }
 
+    public function getByUuid($uuid): Course
+    {
+        return $this->course->whereUuid($uuid)->firstOrFail();
+    }
+
     /**
      * Save Course
      *
