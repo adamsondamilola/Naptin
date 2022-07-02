@@ -15,8 +15,8 @@ class ApplicantController extends Controller
 
     public function store(ApplicantRequest $request): JsonResponse
     {
-        dd('stop here');
         $newApplication = $this->applicantService->createApplication($request->post('courseUuid'));
-        return response()->json($newApplication, ResponseConstant::HTTP_OK);
+        $status = $newApplication->isSuccess() ? ResponseConstant::HTTP_CREATED : ResponseConstant::HTTP_CONFLICT;
+        return response()->json($newApplication, $status);
     }
 }

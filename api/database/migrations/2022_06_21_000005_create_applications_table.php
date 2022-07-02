@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('application_number')->unique();
             $table->foreignId('trainee_id')->constrained('users')->restrictOnDelete();
             $table->foreignId('course_id')->constrained()->restrictOnDelete();
-            $table->string('status');
+            $table->string('application_status');
 
             $table->timestamps();
         });

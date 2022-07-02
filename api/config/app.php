@@ -11,7 +11,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | ApplicantController Environment
+    | Application Environment
     |--------------------------------------------------------------------------
     |
     | This value determines the "environment" your application is currently
@@ -24,7 +24,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | ApplicantController Debug Mode
+    | Application Debug Mode
     |--------------------------------------------------------------------------
     |
     | When your application is in debug mode, detailed error messages with
@@ -37,7 +37,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | ApplicantController URL
+    | Application URL
     |--------------------------------------------------------------------------
     |
     | This URL is used by the console to properly generate URLs when using
@@ -52,7 +52,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | ApplicantController Timezone
+    | Application Timezone
     |--------------------------------------------------------------------------
     |
     | Here you may specify the default timezone for your application, which
@@ -65,7 +65,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | ApplicantController Locale Configuration
+    | Application Locale Configuration
     |--------------------------------------------------------------------------
     |
     | The application locale determines the default locale that will be used
@@ -78,7 +78,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | ApplicantController Fallback Locale
+    | Application Fallback Locale
     |--------------------------------------------------------------------------
     |
     | The fallback locale determines the locale to use when the current one
@@ -179,7 +179,7 @@ return [
          */
 
         /*
-         * ApplicantController Service Providers...
+         * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,

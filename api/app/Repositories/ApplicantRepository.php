@@ -9,18 +9,19 @@ use Illuminate\Support\Str;
 
 class ApplicantRepository
 {
-    public function __construct(private readonly ApplicantService $applicantService)
-    {
-    }
-
-    public function createApplication(int $courseId, int $traineeId): array
+    public function createApplication(int $courseId, int $traineeId): Application
     {
         return Application::create([
             'uuid' => Str::uuid(),
-            'applicatin_number' => $this->applicantService->generateApplicationNumber(),
+            'application_number' => ApplicantService::generateApplicationNumber(),
             'trainee_id' => $traineeId,
             'course_id' => $courseId,
-            'Status' => ApplicationStatus::PROSPECTIVE->value
-        ])->toArray();
+            'application_status' => ApplicationStatus::PROSPECTIVE->value
+        ]);
+    }
+
+    public function hasTraineeAlreadyApplied(int $courseId, int $traineeId): bool
+    {
+        return (bool) Application::where(['course_id' => $courseId, 'trainee_id' => $traineeId])->count();
     }
 }

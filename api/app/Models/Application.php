@@ -12,6 +12,10 @@ class Application extends Model
 
     protected $guarded = [];
 
+    protected $hidden = [
+//        'id'
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(Application::class, 'trainee_id', 'id');

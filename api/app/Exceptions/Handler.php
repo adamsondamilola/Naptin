@@ -50,6 +50,7 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+
     }
 
     public function render($request, Throwable $e): JsonResponse
@@ -62,6 +63,6 @@ class Handler extends ExceptionHandler
 
             return response()->json($payload->setPayload(false, $errorMessage), ResponseConstant::HTTP_NOT_FOUND);
         }
-        return response()->json($payload->setPayload(false), ResponseConstant::HTTP_INTERNAL_SERVER_ERROR);
+        return parent::render($request, $e);
     }
 }
