@@ -18,6 +18,11 @@ class Application extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(Application::class, 'trainee_id', 'id');
+        return $this->belongsTo(User::class, 'trainee_id');
+    }
+
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class);
     }
 }
