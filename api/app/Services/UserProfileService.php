@@ -3,13 +3,15 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Http\GenerahPayload;
+use App\Repositories\RelationshipRepository;
 use App\Repositories\UserRepository;
 
 class UserProfileService
 {
     public function __construct(
         private readonly GenerahPayload $payload,
-        private readonly UserRepository $userRepository
+        private readonly UserRepository $userRepository,
+        private readonly RelationshipRepository $relationshipRepository
     ) {
     }
 
@@ -18,5 +20,13 @@ class UserProfileService
         return $this->userRepository->updateAddress($data)
             ? $this->payload->setPayload(true, 'Address successfully updated')
             : $this->payload->setPayload(false, 'Error Updating Address');
+    }
+
+    public function updateNextOfKin(array $data): GenerahPayload
+    {
+        $data['relationship'] = $this->relationshipRepository->getNameFromId($data['relationship']);
+        return $this->userRepository->updateNextOfKin($data)
+            ? $this->payload->setPayload(true, 'Next of kin successfully updated')
+            : $this->payload->setPayload(false, 'Error Updating Next of kin');
     }
 }

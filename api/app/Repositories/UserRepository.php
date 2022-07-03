@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Repositories;
 
+use App\Models\NextOfKin;
 use App\Models\User;
 use App\Models\UserDetail;
 use Illuminate\Support\Carbon;
@@ -67,5 +68,21 @@ class UserRepository
             'lga_of_origin' => $data['lgaOfOrigin'],
             'residential_address' => $data['homeAddress']
         ]);
+    }
+
+    public function updateNextOfKin(array $data): bool
+    {
+        $nextOfKin = NextOfKin::updateOrCreate(
+            ['user_id' => Auth::id()],
+            [
+                'first_name' => $data['firstName'],
+                'surname' => $data['surname'],
+                'relationship' => $data['relationship'],
+                'address' => $data['address'],
+                'phone_number' => $data['phoneNumber']
+            ]
+        );
+
+        return $nextOfKin->exists;
     }
 }

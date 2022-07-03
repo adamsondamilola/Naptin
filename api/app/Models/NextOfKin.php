@@ -9,5 +9,6 @@ class NextOfKin extends Model
 {
     use HasFactory;
 
+    protected $table = 'next_of_kins';
     protected $guarded = [];
 }

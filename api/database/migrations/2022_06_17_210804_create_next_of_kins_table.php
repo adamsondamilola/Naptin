@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('next_of_kins', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->restrictOnDelete();
-            $table->string('first_name')->nullable();
-            $table->string('surname')->nullable();
-            $table->string('relationship')->nullable();
-            $table->text('address')->nullable();
-            $table->string('phone_number', 15)->nullable();
+            $table->string('first_name');
+            $table->string('surname');
+            $table->string('relationship');
+            $table->text('address');
+            $table->string('phone_number', 15);
 
             $table->timestamps();
         });
