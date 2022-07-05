@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Repositories;
 
+use App\Models\Kit;
 use App\Models\NextOfKin;
 use App\Models\User;
 use App\Models\UserDetail;
@@ -80,6 +81,20 @@ class UserRepository
                 'relationship' => $data['relationship'],
                 'address' => $data['address'],
                 'phone_number' => $data['phoneNumber']
+            ]
+        );
+
+        return $nextOfKin->exists;
+    }
+
+    public function updateKit(array $data): bool
+    {
+        $nextOfKin = Kit::updateOrCreate(
+            ['user_id' => Auth::id()],
+            [
+                'shoe_size' => $data['shoeSize'],
+                'overall_size' => $data['overallSize'],
+                't_shirt_size' => $data['tShirtSize']
             ]
         );
 

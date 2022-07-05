@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\GenerahPayload;
+use App\Http\Requests\KitResquest;
 use App\Http\Requests\NextOfKinRequest;
 use App\Http\Requests\UserAddressRequest;
 use App\Services\UserProfileService;
@@ -30,6 +31,14 @@ class UserProfileController extends Controller
     public function relationships(): JsonResponse
     {
         $responseData = $this->userProfileService->getAllRelationship();
+        return response()->json($responseData, ResponseConstant::HTTP_OK);
+    }
+
+    public function updateKit(KitResquest $request): JsonResponse
+    {
+        $this->authorize('update-kit');
+
+        $responseData = $this->userProfileService->updateKit($request->all());
         return response()->json($responseData, ResponseConstant::HTTP_OK);
     }
 

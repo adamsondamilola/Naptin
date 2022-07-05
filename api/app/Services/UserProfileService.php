@@ -8,6 +8,7 @@ use App\Repositories\UserRepository;
 
 class UserProfileService
 {
+
     public function __construct(
         private readonly GenerahPayload $payload,
         private readonly UserRepository $userRepository,
@@ -34,5 +35,12 @@ class UserProfileService
     {
         $relationships = $this->relationshipRepository->getAll();
         return $this->payload->setPayload(true, 'Fetched all relationships', $relationships);
+    }
+
+    public function updateKit(array $data): GenerahPayload
+    {
+        return $this->userRepository->updateKit($data)
+            ? $this->payload->setPayload(true, 'Kit successfully updated')
+            : $this->payload->setPayload(false, 'Error updating kit');
     }
 }
