@@ -29,4 +29,10 @@ class UserProfileService
             ? $this->payload->setPayload(true, 'Next of kin successfully updated')
             : $this->payload->setPayload(false, 'Error Updating Next of kin');
     }
+
+    public function getAllRelationship(): GenerahPayload
+    {
+        $relationships = $this->relationshipRepository->getAll();
+        return $this->payload->setPayload(true, 'Fetched all relationships', $relationships);
+    }
 }

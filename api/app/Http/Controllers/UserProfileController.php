@@ -27,6 +27,12 @@ class UserProfileController extends Controller
         return $this->okOrErrorResponse($responseData);
     }
 
+    public function relationships(): JsonResponse
+    {
+        $responseData = $this->userProfileService->getAllRelationship();
+        return response()->json($responseData, ResponseConstant::HTTP_OK);
+    }
+
     private function okOrErrorResponse(GenerahPayload $responseData): JsonResponse
     {
         return $responseData->isSuccess()

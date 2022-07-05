@@ -42,8 +42,11 @@ Route::group(['prefix' => 'application', 'middleware' => 'auth:sanctum'], functi
 
 //Profile Update
 Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function () {
-    Route::patch('address-update', [UserProfileController::class, 'updateAddress']);
-    Route::post('nok-update', [UserProfileController::class, 'updateNextOfKin']);
+    Route::controller(UserProfileController::class)->group(function () {
+        Route::get('relationships', 'relationships');
+        Route::patch('address-update', 'updateAddress');
+        Route::post('nok-update', 'updateNextOfKin');
+    });
 });
 
 //Trainee Management

@@ -11,4 +11,9 @@ class RelationshipRepository
     {
         return Relationship::where(['id' => $id])->value('name');
     }
+
+    public function getAll(): array
+    {
+        return Relationship::select(['id', 'name'])->get()->toArray();
+    }
 }
