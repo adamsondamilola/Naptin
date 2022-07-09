@@ -3,6 +3,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Http\GenerahPayload;
+use App\Http\Requests\EducationLevelRequest;
 use App\Http\Requests\KitResquest;
 use App\Http\Requests\NextOfKinRequest;
 use App\Http\Requests\UserAddressRequest;
@@ -34,11 +35,20 @@ class UserProfileController extends Controller
         return response()->json($responseData, ResponseConstant::HTTP_OK);
     }
 
+    /**
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     */
     public function updateKit(KitResquest $request): JsonResponse
     {
         $this->authorize('update-kit');
 
         $responseData = $this->userProfileService->updateKit($request->all());
+        return response()->json($responseData, ResponseConstant::HTTP_OK);
+    }
+
+    public function updateEducationLevel(EducationLevelRequest $request): JsonResponse
+    {
+        $responseData = $this->userProfileService->updateEducationLevel($request->all());
         return response()->json($responseData, ResponseConstant::HTTP_OK);
     }
 

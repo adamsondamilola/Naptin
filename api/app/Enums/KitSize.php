@@ -2,8 +2,12 @@
 declare(strict_types=1);
 namespace App\Enums;
 
+use App\Traits\EnumToString;
+
 enum KitSize: string
 {
+    use EnumToString;
+    
     case SMALL = 's';
     case MEDIUM = 'm';
     case LARGE = 'l';
@@ -11,13 +15,6 @@ enum KitSize: string
 
     public static function toString(): string
     {
-        $string = '';
-        $casesLength = count(self::cases()) - 1;
-        $iteration = 0;
-        foreach (self::cases() as $case) {
-            $string = $iteration === $casesLength ? $string . $case->value : $string . $case->value . ',';
-            $iteration++;
-        }
-        return $string;
+        return self::concatToString(self::cases());
     }
 }
