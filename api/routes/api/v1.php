@@ -47,6 +47,7 @@ Route::group(['prefix' => 'profile', 'middleware' => 'auth:sanctum'], function (
         Route::patch('address-update', 'updateAddress');
         Route::post('nok-update', 'updateNextOfKin');
         Route::post('kit-update', 'updateKit');
+        Route::post('educational-level-update', 'updateEducationLevel');
     });
 });
 

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Http\GenerahPayload;
 use App\Repositories\RelationshipRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Storage;
 
 class UserProfileService
 {
@@ -42,5 +43,17 @@ class UserProfileService
         return $this->userRepository->updateKit($data)
             ? $this->payload->setPayload(true, 'Kit successfully updated')
             : $this->payload->setPayload(false, 'Error updating kit');
+    }
+
+    public function updateEducationLevel(array $data): GenerahPayload
+    {
+        if (!empty($data['document'])) {
+            if ($educationLevel = $this->userRepository->getOneEducationalLevel($data['level'])) {
+                Storage::delete(config('app.educational_level_document_path') .'/'. $educationLevel->document);
+            }
+            $data['document'] = pathinfo($data['document']->store(config('app.educational_level_document_path')), PATHINFO_BASENAME);
+        }
+        $this->userRepository->updateEducationLevel($data);
+        return $this->payload->setPayload(true, 'Educational Level successfully updated');
     }
 }

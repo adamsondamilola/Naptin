@@ -4,12 +4,13 @@ namespace App\Enums;
 
 use App\Traits\EnumToString;
 
-enum Gender: string
+enum EducationLevel: string
 {
     use EnumToString;
 
-    case MALE = 'm';
-    case FEMALE = 'f';
+    case PRIMARY = 'primary';
+    case SECONDARY = 'secondary';
+    case TERTIARY = 'tertiary';
 
     public static function toString(): string
     {

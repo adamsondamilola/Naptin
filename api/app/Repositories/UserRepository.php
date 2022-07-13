@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace App\Repositories;
 
+use App\Models\EducationalLevel;
 use App\Models\Kit;
 use App\Models\NextOfKin;
 use App\Models\User;
@@ -15,6 +16,17 @@ use Illuminate\Support\Str;
 
 class UserRepository
 {
+
+    /**
+     * @var \Illuminate\Support\Carbon
+     */
+    private Carbon $carbon;
+
+    public function __construct()
+    {
+        $this->carbon = new Carbon();
+    }
+
     public function getById(int $id): ?User
     {
         return User::find($id);
@@ -99,5 +111,28 @@ class UserRepository
         );
 
         return $nextOfKin->exists;
+    }
+
+    public function updateEducationLevel(array $data): bool
+    {
+        $educationLevel = EducationalLevel::updateOrCreate(
+            [
+                'user_id' => Auth::id(),
+                'level' => $data['level']
+            ],
+            [
+                'start_date' => Carbon::create($data['startDate']),
+                'end_date' => Carbon::create($data['endDate']),
+                'institution_name' => $data['institutionName'],
+                'qualification_obtained' => $data['qualificationObtained'],
+                'document' => $data['document']
+            ]
+        );
+        return $educationLevel->exists;
+    }
+
+    public function getOneEducationalLevel(string $level): EducationalLevel
+    {
+        return EducationalLevel::where(['user_id' => Auth::id(), 'level' => $level])->first();
     }
 }

@@ -9,6 +9,8 @@ return [
 
     'paginate' => env('PAGINATE', 30),
 
+    'educational_level_document_path' => 'education-documents',
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment
